@@ -3,47 +3,29 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        System.out.println(new Main().solution(str));
+        int n = sc.nextInt();
+        while(n-- != 0) {
+            String str = sc.next();
+            System.out.println(new Main().solution(str));
+        }
     }
 
     private String solution(String str) {
-
-        String answer = "";
-        int max = Integer.MIN_VALUE;
-
-        for (String s : str.split(" ")) {
-            int length = s.length();
-            if (length > max) {
-                max = length;
-                answer = s;
-            }
-        }
-
-        return answer;
+        return new StringBuilder(str).reverse().toString();
     }
 
 //    private String solution(String str) {
-//
 //        String answer = "";
-//        int max = Integer.MIN_VALUE;
 //
-//        int pos = 0;
-//        while ((pos = str.indexOf(" ")) != -1) {
-//            String tmp = str.substring(0, pos);
-//            int length = tmp.length();
-//            if (max < length) {
-//                max = length;
-//                answer = tmp;
-//            }
-//
-//            str = str.substring(pos + 1);
+//        char[] c = str.toCharArray();
+//        int len = c.length;
+//        for (int i = 0; i < len / 2; i++) {
+//            char tmp = c[i];
+//            c[i] = c[len - 1 - i];
+//            c[len - 1 - i] = tmp;
 //        }
 //
-//        if (max < str.length()) {
-//            answer = str;
-//        }
-//
+//        answer = String.valueOf(c);
 //        return answer;
 //    }
 }
