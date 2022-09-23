@@ -11,7 +11,7 @@ public class p0101 {
     }
 
     private int solution(String str, char chr) {
-//xxx
+// config test
         str = str.toLowerCase();
         chr = Character.toLowerCase(chr);
 
