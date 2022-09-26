@@ -7,8 +7,7 @@ public class Main {
         System.out.println(new Main().solution(str));
     }
 
-    private String solution(String str) {
-        str = str.replaceAll("[^a-zA-Z]", "");
-        return str.equalsIgnoreCase(new StringBuilder(str).reverse().toString()) ? "YES" : "NO";
+    private Integer solution(String str) {
+        return Integer.parseInt(str.replaceAll("[^0-9]", ""));
     }
 }
