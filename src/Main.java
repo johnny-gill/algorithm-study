@@ -8,28 +8,22 @@ public class Main {
     }
 
     private String solution(String str) {
-        String answer = "";
-
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (i == str.indexOf(c)) {
-                answer += c;
-            }
-        }
-
-        return answer;
+        return str.equalsIgnoreCase(new StringBuilder(str).reverse().toString()) ? "YES" : "NO";
     }
 
 //    private String solution(String str) {
-//        boolean alpha[] = new boolean[26];
-//        String answer = "";
+//        String answer = "YES";
 //
-//        for (char c : str.toCharArray()) {
-//            if(!alpha[c - 'a']) {
-//                alpha[c - 'a'] = true;
-//                answer += c;
+//        str = str.toLowerCase();
+//        int len = str.length() / 2;
+//        int back = str.length() - 1;
+//        for (int i = 0; i < len; i++) {
+//            if (str.charAt(i) != str.charAt(back - i)) {
+//                answer = "NO";
+//                break;
 //            }
 //        }
+//
 //        return answer;
 //    }
 
