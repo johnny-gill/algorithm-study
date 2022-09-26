@@ -8,26 +8,29 @@ public class Main {
     }
 
     private String solution(String str) {
+        String answer = "";
 
-        char[] chars = str.toCharArray();
-        int leftIdx = 0;
-        int rightIdx = str.length() - 1;
-
-        while(leftIdx < rightIdx) {
-            if (!Character.isLetter(chars[leftIdx])) {
-                leftIdx++;
-            } else if (!Character.isLetter(chars[rightIdx])) {
-                rightIdx--;
-            } else {
-                char tmp = chars[leftIdx];
-                chars[leftIdx] = chars[rightIdx];
-                chars[rightIdx] = tmp;
-                leftIdx++;
-                rightIdx--;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (i == str.indexOf(c)) {
+                answer += c;
             }
         }
 
-        return String.valueOf(chars);
+        return answer;
     }
+
+//    private String solution(String str) {
+//        boolean alpha[] = new boolean[26];
+//        String answer = "";
+//
+//        for (char c : str.toCharArray()) {
+//            if(!alpha[c - 'a']) {
+//                alpha[c - 'a'] = true;
+//                answer += c;
+//            }
+//        }
+//        return answer;
+//    }
 
 }
