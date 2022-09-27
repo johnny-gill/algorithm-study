@@ -3,39 +3,40 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
         String s = sc.next();
-        char t = sc.next().charAt(0);
-        for (int i : new Main().solution(s, t)) {
-            System.out.print(i + " ");
-        }
-
+        System.out.println(new Main().solution(n, s));
     }
 
-//    teachermode e
-//    edomrehcaet e
-//    1 0 1 2 1 0 1 2 2 1 0
-    private int[] solution(String s, char t) {
-        int[] answer = new int[s.length()];
-        boolean findLeftIndex = false;
-        int leftIndex = 0;
-        int rightIndex = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == t) {
-                rightIndex = i + 1;
-                leftIndex = i;
-                findLeftIndex = true;
-            } else {
-                if (!findLeftIndex) { // 왼쪽에 t가 없으면 오른쪽 t와의 거리 계산
-                    answer[i] = s.indexOf(t, rightIndex) - i;
-                } else if (s.indexOf(t, rightIndex) == -1) { // 오른쪽에 t가 없으면 왼쪽 t와의 거리 계산
-                    answer[i] = i - leftIndex;
-                } else {
-                    answer[i] = Math.min(i - leftIndex, s.indexOf(t, rightIndex) - i);
-                }
-            }
+    private String solution(int n, String s) {
+        String answer = "";
+
+        for (int i = 0; i < n; i++) {
+            String tmp = s.substring(0, 7).replace('#', '1').replace('*', '0');
+            s = s.substring(7);
+            int num = Integer.parseInt(tmp, 2);
+            answer += (char) num;
         }
+
         return answer;
     }
 
-
+//    private String solution(int n, String s) {
+//        String answer = "";
+//
+//        for (int i = 0; i < n; i++) {
+//            String tmp = s.substring(0, 7);
+//            s = s.substring(7);
+//
+//            int decimal = 0;
+//            for (int j = 0; j < 7; j++) {
+//                if (tmp.charAt(j) == '#') {
+//                    decimal += Math.pow(2, 6 - j);
+//                }
+//            }
+//            answer += (char) decimal;
+//        }
+//
+//        return answer;
+//    }
 }
