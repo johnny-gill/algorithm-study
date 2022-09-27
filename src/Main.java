@@ -1,31 +1,22 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[][] arr = new int[2][n];
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < n; j++) {
-                arr[i][j] = sc.nextInt();
-            }
-        }
-
-        new Main().solution(n, arr);
+        new Main().solution(n);
     }
 
-    private void solution(int n, int[][] arr) {
-        for (int j = 0; j < n; j++) {
-            int a = arr[0][j];
-            int b = arr[1][j];
+    private void solution(int n) {
+        int[] arr = new int[n];
+        arr[0] = arr[1] = 1;
 
-            if (a == b) {
-                System.out.println("D");
-            } else if ((a == 2 && b == 1) || (a == 1 && b == 3) || (a == 3 && b == 2)) {
-                System.out.println("A");
-            } else {
-                System.out.println("B");
-            }
+        System.out.print("1 1 ");
+        for (int i = 2; i < n; i++) {
+            arr[i] = arr[i - 2] + arr[i - 1];
+            System.out.print(arr[i] + " ");
         }
     }
 }
