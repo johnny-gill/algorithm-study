@@ -9,15 +9,19 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        new Main().solution(n, arr);
+        System.out.println(new Main().solution(n, arr));
     }
 
-    private void solution(int n, int[] arr) {
-        System.out.print(arr[0] + " ");
+    private int solution(int n, int[] arr) {
+        int answer = 1;
+        int maxHeight = arr[0];
         for (int i = 1; i < n; i++) {
-            if (arr[i - 1] < arr[i]) {
-                System.out.print(arr[i] + " ");
+            if (maxHeight < arr[i]) {
+                maxHeight = arr[i];
+                answer++;
             }
         }
+
+        return answer;
     }
 }
