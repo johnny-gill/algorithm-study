@@ -1,13 +1,13 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[][] arr = new int[n][n];
+        int[][] arr = new int[n][5];
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+            for (int j = 0; j < 5; j++) {
                 arr[i][j] = sc.nextInt();
             }
         }
@@ -16,30 +16,27 @@ public class Main {
     }
 
     private void solution(int n, int[][] arr) {
-        int sum = 0;
-        int[] dx = {0, 0, 1, -1};
-        int[] dy = {1, -1, 0, 0};
+        int max = Integer.MIN_VALUE;
+        int answer = 0;
 
         for (int i = 0; i < n; i++) {
+            int cnt = 0;
             for (int j = 0; j < n; j++) {
-                boolean isTop = true;
-                for (int k = 0; k < 4; k++) {
-                    int nx = i + dx[k];
-                    int ny = j + dy[k];
-
-                    if (nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
-                    if (arr[i][j] <= arr[nx][ny]) {
-                        isTop = false;
+                if (i == j) continue;
+                for (int k = 0; k < 5; k++) { // 학년
+                    if (arr[i][k] == arr[j][k]) {
+                        cnt++;
                         break;
                     }
                 }
+            }
 
-                if (isTop) {
-                    sum++;
-                }
+            if (max < cnt) {
+                max = cnt;
+                answer = i + 1;
             }
         }
 
-        System.out.println(sum);
+        System.out.println(answer);
     }
 }
