@@ -4,30 +4,43 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[] arr = new int[n];
+        int[][] arr = new int[n][n];
 
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = sc.nextInt();
+            }
         }
 
         new Main().solution(n, arr);
     }
 
-    private void solution(int n, int[] arr) {
-        int[] answer = new int[n]{1,1,1,1,1};
+    private void solution(int n, int[][] arr) {
+        int max = Integer.MIN_VALUE;
 
+        int leftDiagonalSum = 0;
+        int rightDiagonalSum = 0;
         for (int i = 0; i < n; i++) {
-            answer[i] = 1;
+            int rowSum = 0;
+            int colSum = 0;
             for (int j = 0; j < n; j++) {
-                if (arr[i] < arr[j]) {
-                    answer[i]++;
+                rowSum += arr[i][j];
+                colSum += arr[j][i];
+
+                if (i == j) {
+                    leftDiagonalSum += arr[i][j];
+                }
+
+                if (i == j - n + 1) {
+                    rightDiagonalSum += arr[i][j];
                 }
             }
+            max = Integer.max(max, rowSum);
+            max = Integer.max(max, colSum);
         }
+        max = Integer.max(max, leftDiagonalSum);
+        max = Integer.max(max, rightDiagonalSum);
 
-        for (int i : answer) {
-            System.out.print(i + " ");
-        }
-
+        System.out.println(max);
     }
 }
