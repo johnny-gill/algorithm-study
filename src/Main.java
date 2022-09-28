@@ -16,31 +16,30 @@ public class Main {
     }
 
     private void solution(int n, int[][] arr) {
-        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        int[] dx = {0, 0, 1, -1};
+        int[] dy = {1, -1, 0, 0};
 
-        int leftDiagonalSum = 0;
-        int rightDiagonalSum = 0;
         for (int i = 0; i < n; i++) {
-            int rowSum = 0;
-            int colSum = 0;
             for (int j = 0; j < n; j++) {
-                rowSum += arr[i][j];
-                colSum += arr[j][i];
+                boolean isTop = true;
+                for (int k = 0; k < 4; k++) {
+                    int nx = i + dx[k];
+                    int ny = j + dy[k];
 
-                if (i == j) {
-                    leftDiagonalSum += arr[i][j];
+                    if (nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
+                    if (arr[i][j] <= arr[nx][ny]) {
+                        isTop = false;
+                        break;
+                    }
                 }
 
-                if (i == j - n + 1) {
-                    rightDiagonalSum += arr[i][j];
+                if (isTop) {
+                    sum++;
                 }
             }
-            max = Integer.max(max, rowSum);
-            max = Integer.max(max, colSum);
         }
-        max = Integer.max(max, leftDiagonalSum);
-        max = Integer.max(max, rightDiagonalSum);
 
-        System.out.println(max);
+        System.out.println(sum);
     }
 }
