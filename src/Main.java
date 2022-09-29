@@ -3,7 +3,6 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<Integer> list = new ArrayList<>();
 
         int N = sc.nextInt();
         int[] a = new int[N];
@@ -21,34 +20,29 @@ public class Main {
     }
 
     private void solution(int N, int M, int[] a, int[] b) {
-        List<Integer> list = new ArrayList<>();
+
+        List<Integer> answer = new ArrayList<>();
+
+        Arrays.sort(a);
+        Arrays.sort(b);
+
         int aIdx = 0;
         int bIdx = 0;
 
-        while (true) {
-            if (N == aIdx) {
-                for (int i = bIdx; i < M; i++) {
-                    list.add(b[bIdx++]);
-                }
-                break;
-            }
-
-            if (M == bIdx) {
-                for (int i = aIdx; i < N; i++) {
-                    list.add(a[aIdx++]);
-                }
-                break;
-            }
-
-            if (a[aIdx] < b[bIdx]) {
-                list.add(a[aIdx++]);
+        while(aIdx != N && bIdx != M) {
+            if (a[aIdx] == b[bIdx]) {
+                answer.add(a[aIdx]);
+                aIdx++;
+                bIdx++;
+            } else if (a[aIdx] < b[bIdx]) {
+                aIdx++;
             } else {
-                list.add(b[bIdx++]);
+                bIdx++;
             }
         }
 
-        for (Integer num : list) {
-            System.out.print(num + " ");
+        for (Integer i : answer) {
+            System.out.print(i + " ");
         }
     }
 }
