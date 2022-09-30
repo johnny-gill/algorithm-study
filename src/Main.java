@@ -5,44 +5,30 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int N = sc.nextInt();
-        int[] a = new int[N];
+        int K = sc.nextInt();
+
+        int[] arr = new int[N];
         for (int i = 0; i < N; i++) {
-            a[i] = sc.nextInt();
+            arr[i] = sc.nextInt();
         }
 
-        int M = sc.nextInt();
-        int[] b = new int[M];
-        for (int i = 0; i < M; i++) {
-            b[i] = sc.nextInt();
-        }
-
-        new Main().solution(N, M, a, b);
+        new Main().solution(N, K, arr);
     }
 
-    private void solution(int N, int M, int[] a, int[] b) {
+    private void solution(int N, int K, int[] arr) {
+        int max = 0;
+        int sum = 0;
 
-        List<Integer> answer = new ArrayList<>();
+        for (int i = 0; i < K; i++) {
+            sum += arr[i];
+        }
+        max = sum;
 
-        Arrays.sort(a);
-        Arrays.sort(b);
-
-        int aIdx = 0;
-        int bIdx = 0;
-
-        while(aIdx != N && bIdx != M) {
-            if (a[aIdx] == b[bIdx]) {
-                answer.add(a[aIdx]);
-                aIdx++;
-                bIdx++;
-            } else if (a[aIdx] < b[bIdx]) {
-                aIdx++;
-            } else {
-                bIdx++;
-            }
+        for (int i = K; i < N; i++) {
+            sum = sum - arr[i - K] + arr[i];
+            max = Integer.max(max, sum);
         }
 
-        for (Integer i : answer) {
-            System.out.print(i + " ");
-        }
+        System.out.println(max);
     }
 }
