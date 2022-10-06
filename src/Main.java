@@ -3,33 +3,30 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         int N = sc.nextInt();
-        int M = sc.nextInt();
-
-        int[] arr = new int[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = sc.nextInt();
-        }
-
-        new Main().solution(N, M, arr);
+        new Main().solution(N);
     }
 
-    private void solution(int N, int M, int[] arr) {
-        int answer, sum, lt;
-        answer = sum = lt = 0;
+    private void solution(int N) {
+        int answer = 0;
+        int lt = 1;
+        int sum = 0;
+        N = N/2 + 1;
 
-        for (int rt = 0; rt < N; rt++) {
-            sum += arr[rt];
+        for (int rt = 1; rt < N; rt++) {
+            sum += rt;
 
-            if (sum == M) {
+            if (sum == N) {
                 answer++;
+                sum -= lt++;
             }
 
-            while (sum >= M) {
-                sum -= arr[lt++];
-                if (sum == M) {
+            while (sum > N) {
+                sum -= lt++;
+
+                if (sum == N) {
                     answer++;
+                    sum -= lt++;
                 }
             }
         }
