@@ -3,48 +3,23 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        String str = sc.next();
+        String str1 = sc.next();
+        String str2 = sc.next();
 
-        new Main().solution(N, str);
+        new Main().solution(str1, str2);
     }
 
-//    private void solution(int n, String str) {
-//        int[] arr = new int[5];
-//
-//        for (char c : str.toCharArray()) {
-//            arr[c - 'A']++;
-//        }
-//
-//        int max = 0;
-//        int answer = 0;
-//        for (int i = 0; i < 5; i++) {
-//            if (max < arr[i]) {
-//                max = arr[i];
-//                answer = i;
-//            }
-//        }
-//
-//        System.out.println(Character.toChars(answer + 'A'));
-//    }
+    private void solution(String str1, String str2) {
+        Map<Character, Integer> map1 = new HashMap<>();
+        Map<Character, Integer> map2 = new HashMap<>();
 
-    private void solution(int n, String str) {
-        Map<Character, Integer> map = new HashMap<>();
-
-        for (char c : str.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        for (int i = 0; i < str1.length(); i++) {
+            char c1 = str1.charAt(i);
+            char c2 = str2.charAt(i);
+            map1.put(c1, map1.getOrDefault(c1, 0) + 1);
+            map2.put(c2, map2.getOrDefault(c2, 0) + 1);
         }
 
-        int max = 0;
-        char answer = 0;
-        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            int curVal = entry.getValue();
-            if (max < curVal) {
-                max = curVal;
-                answer = entry.getKey();
-            }
-        }
-
-        System.out.println(answer);
+        System.out.println(map1.equals(map2) ? "YES" : "NO");
     }
 }
