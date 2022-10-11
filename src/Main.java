@@ -3,23 +3,57 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String str1 = sc.next();
-        String str2 = sc.next();
-
-        new Main().solution(str1, str2);
+        int N = sc.nextInt();
+        int K = sc.nextInt();
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextInt();
+        }
+        new Main().solution(N, K, arr);
     }
 
-    private void solution(String str1, String str2) {
-        Map<Character, Integer> map1 = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
+    private void solution(int N, int K, int[] arr) {
+        Map<Integer, Integer> map = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < str1.length(); i++) {
-            char c1 = str1.charAt(i);
-            char c2 = str2.charAt(i);
-            map1.put(c1, map1.getOrDefault(c1, 0) + 1);
-            map2.put(c2, map2.getOrDefault(c2, 0) + 1);
+        int lt = 0;
+        for (int rt = 0; rt < N; rt++) {
+            map.put(arr[rt], map.getOrDefault(arr[rt], 0) + 1);
+
+            if (rt - lt + 1 == K) {
+                sb.append(map.size());
+                sb.append(" ");
+                map.put(arr[lt], map.get(arr[lt]) - 1);
+                if (map.get(arr[lt]) == 0) {
+                    map.remove(arr[lt]);
+                }
+                lt++;
+            }
         }
 
-        System.out.println(map1.equals(map2) ? "YES" : "NO");
+        System.out.println(sb);
     }
+
+//    private void solution(int N, int K, int[] arr) {
+//        int lt = 0;
+//        int cnt = 0;
+//        List<Integer> list = new ArrayList<>();
+//        StringBuilder sb = new StringBuilder();
+//
+//        for (int rt = 0; rt < N; rt++) {
+//            if (list.contains(arr[rt])) {
+//                cnt++;
+//            }
+//            list.add(arr[rt]);
+//
+//            if (rt - lt + 1 == K) {
+//                sb.append(K - cnt);
+//                sb.append(" ");
+//                list.remove(lt++);
+//                cnt = 0;
+//            }
+//        }
+//
+//        System.out.println(sb);
+//    }
 }
