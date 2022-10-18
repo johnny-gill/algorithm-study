@@ -3,37 +3,30 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-        String t = sc.nextLine();
+        int N = sc.nextInt();
+        int K = sc.nextInt();
 
-        new Main().solution(s, t);
-    }
-
-    private void solution(String s, String t) {
-        Map<Character, Integer> sMap = new HashMap<>();
-        for (char c : t.toCharArray()) {
-            sMap.put(c, sMap.getOrDefault(c, 0) + 1);
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextInt();
         }
 
-        int cnt = 0;
-        int lt = 0;
-        int tLength = t.length();
-        Map<Character, Integer> tMap = new HashMap<>();
-        for (int rt = 0; rt < s.length(); rt++) {
-            tMap.put(s.charAt(rt), tMap.getOrDefault(s.charAt(rt), 0) + 1);
-            if (rt - lt + 1 == tLength) {
-                if (sMap.equals(tMap)) {
-                    cnt++;
-                }
+        boolean[] check = new boolean[301];
+        List<Integer> list = new ArrayList<>();
 
-                tMap.put(s.charAt(lt), tMap.get(s.charAt(lt)) - 1);
-                if (tMap.get(s.charAt(lt)) == 0) {
-                    tMap.remove(s.charAt(lt));
+        for (int i = 0; i < N - 2; i++) {
+            for (int j = i + 1; j < N - 1; j++) {
+                for (int k = j + 1; k < N; k++) {
+                    int sum = arr[i] + arr[j] + arr[k];
+                    if (!check[sum]) {
+                        check[sum] = true;
+                        list.add(sum);
+                    }
                 }
-                lt++;
             }
         }
 
-        System.out.println(cnt);
+        list.sort(Comparator.reverseOrder());
+        System.out.println((list.size() < K) ? -1 : list.get(K - 1));
     }
 }
