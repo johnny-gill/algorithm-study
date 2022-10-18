@@ -11,22 +11,28 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        boolean[] check = new boolean[301];
-        List<Integer> list = new ArrayList<>();
+        System.out.println(new Main().solution(N, K, arr));
 
-        for (int i = 0; i < N - 2; i++) {
-            for (int j = i + 1; j < N - 1; j++) {
+    }
+
+    private int solution(int N, int K, int[] arr) {
+        TreeSet<Integer> treeSet = new TreeSet<>(Collections.reverseOrder());
+
+        for (int i = 0; i < N; i++) {
+            for (int j = i + 1; j < N; j++) {
                 for (int k = j + 1; k < N; k++) {
                     int sum = arr[i] + arr[j] + arr[k];
-                    if (!check[sum]) {
-                        check[sum] = true;
-                        list.add(sum);
-                    }
+                    treeSet.add(sum);
                 }
             }
         }
 
-        list.sort(Comparator.reverseOrder());
-        System.out.println((list.size() < K) ? -1 : list.get(K - 1));
+        int cnt = 0;
+        for (Integer x : treeSet) {
+            cnt++;
+            if (cnt == K) return x;
+        }
+
+        return -1;
     }
 }
