@@ -9,16 +9,18 @@ public class Main {
 
     private String solution(String str) {
 
+        StringBuilder sb = new StringBuilder();
         Stack<Character> stack = new Stack<>();
         for (char c : str.toCharArray()) {
             if (c == '(') {
                 stack.push(c);
-            } else {
-                if (stack.empty()) return "NO";
+            } else if (c == ')'){
                 stack.pop();
+            } else if (stack.empty()) {
+                sb.append(c);
             }
         }
 
-        return stack.empty() ? "YES" : "NO";
+        return sb.toString();
     }
 }
