@@ -3,24 +3,46 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String str = sc.next();
-        System.out.println(new Main().solution(str));
-    }
 
-    private String solution(String str) {
-
-        StringBuilder sb = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
-        for (char c : str.toCharArray()) {
-            if (c == '(') {
-                stack.push(c);
-            } else if (c == ')'){
-                stack.pop();
-            } else if (stack.empty()) {
-                sb.append(c);
+        int N = sc.nextInt();
+        int[][] board = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                board[i][j] = sc.nextInt();
             }
         }
 
-        return sb.toString();
+        int K = sc.nextInt();
+        int[] moves = new int[K];
+        for (int i = 0; i < K; i++) {
+            moves[i] = sc.nextInt();
+        }
+
+        System.out.println(new Main().solution(N, board, K, moves));
+    }
+
+    private int solution(int N, int[][] board, int K, int[] moves) {
+        Stack<Integer> stack = new Stack<>();
+        int cnt = 0;
+
+        for (int i = 0; i < K; i++) {
+            int column = moves[i] - 1;
+            for (int j = 0; j < N; j++) {
+
+                int num = board[j][column];
+                if (num != 0) {
+                    if (!stack.empty() && num == stack.peek()) {
+                        cnt += 2;
+                        stack.pop();
+                    } else {
+                        stack.push(num);
+                    }
+                    board[j][column] = 0;
+                    break;
+                }
+            }
+        }
+
+        return cnt;
     }
 }
