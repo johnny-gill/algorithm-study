@@ -14,7 +14,7 @@ public class Main {
             if (c == '(') {
                 stack.push(c);
             } else {
-                if (stack.empty() || stack.peek() == ')') return "NO";
+                if (stack.empty()) return "NO";
                 stack.pop();
             }
         }
