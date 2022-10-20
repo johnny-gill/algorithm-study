@@ -19,6 +19,6 @@ public class Main {
             }
         }
 
-        return stack.size() == 0 ? "YES" : "NO";
+        return stack.empty() ? "YES" : "NO";
     }
 }
